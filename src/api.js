@@ -10,7 +10,7 @@ export default {
         }).then((response) => {
             return response
         }).catch((error) => {
-                console.log(error);
+                return error
             }
         ),
 };
