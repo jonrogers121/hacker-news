@@ -3,6 +3,7 @@ import './App.css';
 import axiosWrapper from "./api";
 import { connect } from 'react-redux'
 import { searchResult} from "./actions";
+import Sample from "./components/Sample";
 
 export class App extends Component {
 
@@ -20,6 +21,7 @@ export class App extends Component {
     return (
       <div className="App">
         App Page
+          <Sample />
       </div>
     );
   }
