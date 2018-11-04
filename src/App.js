@@ -4,7 +4,7 @@ import axiosWrapper from "./api";
 import { connect } from 'react-redux'
 import { searchResult} from "./actions";
 
-class App extends Component {
+export class App extends Component {
 
   componentDidMount(){
       axiosWrapper.get('jaws').then(
