@@ -1,9 +1,10 @@
 import React from 'react'
 import { Wrapper } from "./styles";
 
-const Sample = () => (
+const NewsCard = ({item}) => (
     <Wrapper>
-        <p>Home page</p>
+        <p>{item.title}</p>
+        <p>{item['time_ago']}</p>
     </Wrapper>
 )
-export default Sample
+export default NewsCard

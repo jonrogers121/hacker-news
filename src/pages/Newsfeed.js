@@ -2,6 +2,7 @@ import React from 'react'
 import axiosWrapper from "../api";
 import {connect} from 'react-redux'
 import {searchResult} from "../actions";
+import NewsCard from "../components/Sample";
 
 export class Newsfeed extends React.Component {
 
@@ -18,9 +19,8 @@ export class Newsfeed extends React.Component {
         return (
             <div>
                 {result && result.map((item, i) =>
-                    <div>
-                        <p>{item.title}</p>
-                        <p>{item['time_ago']}</p>
+                    <div key={i}>
+                        <NewsCard item={item}/>
                     </div>
                 )}
             </div>
