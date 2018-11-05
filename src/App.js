@@ -1,38 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import axiosWrapper from "./api";
-import { connect } from 'react-redux'
-import { searchResult} from "./actions";
-import Sample from "./components/Sample";
+import Main from "./Main";
 
-export class App extends Component {
 
-  componentDidMount(){
-      axiosWrapper.get('jaws').then(
-          (res) => {
-              console.log(res.data)
-              this.props.addResult(res.data)
-          },
-      );
-  }
+export const App = () => (
+    <div>
+        <Main />
+    </div>
+)
 
-  render() {
-    console.log(this.props.result)
-    return (
-      <div className="App">
-        App Page
-          <Sample />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-    result: state.searchResult.data
-})
-
-const mapDispatchToProps = dispatch => ({
-    addResult: () => dispatch(searchResult)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
