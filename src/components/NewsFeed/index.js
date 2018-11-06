@@ -6,9 +6,20 @@ import { withRouter } from 'react-router'
 import {searchResult} from "../../actions/index";
 import NewsCard from "../NewsCard/index";
 import Waypoint from 'react-waypoint'
+import { Container  } from 'bloomer';
 
 export class NewsFeed extends React.Component {
     state = { page: 1 }
+
+    componentDidMount() {
+        const { match, searchResult } = this.props
+        const path = match.path === '/' ? '/news' : match.path
+        axiosWrapper.get(path, 1).then(
+            (res) => {
+                searchResult(res.data, 2)
+            },
+        );
+    }
 
     _handleLoadFunc =()=> {
         const { page } = this.state;
@@ -27,7 +38,7 @@ export class NewsFeed extends React.Component {
     render() {
         const {result} = this.props;
         return (
-            <div>
+            <Container>
                 {result && result.map((item, i) =>
                     <div key={i}>
                         <NewsCard item={item}/>
@@ -37,7 +48,7 @@ export class NewsFeed extends React.Component {
                     onEnter={this._handleLoadFunc}
                     threshold={2.0}
                 />
-            </div>
+            </Container>
         )
     }
 }

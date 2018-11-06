@@ -1,27 +1,30 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import {Newsfeed} from './';
+import { NewsFeed } from './';
+
+const NEWS_FIXTURES = [
+    {
+        title: 'Sample news item',
+        'time_ago' : '11 hours'
+    },
+    {
+        title: 'Sample news item 2',
+        'time_ago' : '11 hours'
+    },
+    {
+        title: 'Sample news item 2',
+        'time_ago' : '11 hours'
+    },
+]
+
+const MATCH_FIXTURE =
+    {
+        path: '/news'
+    }
 
 describe('<NewsFeed/>', () => {
-    const wrapper = mount( <Newsfeed item={ NEWS_FIXTURE } />);
-    const spy = jest.spyOn(wrapper.instance(), "handleShowComments");
+    const wrapper = mount( <NewsFeed item={ NEWS_FIXTURES } match={ MATCH_FIXTURE } />);
     it('renders', () => {
         expect(wrapper).toHaveLength(1);
-    });
-    it('displays a title', () => {
-        const title = wrapper.find('p').at(0)
-        expect(title.text()).toEqual('Sample news item');
-    });
-    it('displays the time since it was posted', () => {
-        const title = wrapper.find('p').at(1)
-        expect(title.text()).toEqual('11 hours');
-    });
-    it('changes state when "show Comments" is clicked', () => {
-        const showComments = wrapper.find('div').at(1)
-        expect(wrapper.state().showComments).toEqual(false)
-        wrapper.instance().forceUpdate();
-        showComments.simulate('click')
-        expect(spy).toHaveBeenCalled()
-        expect(wrapper.state().showComments).toEqual(true)
     });
 })

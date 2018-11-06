@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Wrapper } from "./styles";
+import {Box, Button} from 'bloomer';
 
 class NewsCard extends React.Component {
-    state = { showComments: false }
 
     handleShowComments = () => {
         this.setState(prevState => ({
@@ -11,20 +10,18 @@ class NewsCard extends React.Component {
         }));
     }
 
-    render () {
-        const { item } = this.props
-        const { showComments } = this.state
+    render() {
+        const {item} = this.props
         return (
-            <Wrapper>
-                <p>{item.title}</p>
+            <Box>
+                <Button isColor='warning'>{item.user}</Button>
+                <h2>
+                    <a href={item.url}>
+                        {item.title}
+                    </a>
+                </h2>
                 <p>{item['time_ago']}</p>
-                <div onClick={this.handleShowComments}>
-                    {!showComments ?
-                        <p>Show Comments</p> :
-                        <p>Hide Comments</p>
-                    }
-                </div>
-            </Wrapper>
+            </Box>
         )
     }
 }

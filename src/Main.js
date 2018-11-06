@@ -3,21 +3,13 @@ import {Switch, Route} from 'react-router-dom'
 import {withRouter} from 'react-router'
 import News from "./pages/News";
 import Ask from "./pages/Ask";
-import axiosWrapper from "./api";
 import {connect} from 'react-redux'
 import {searchResult} from "./actions";
+import Newest from "./pages/Newest";
+import Show from "./pages/Show";
+import Jobs from "./pages/Jobs";
 
 export class Main extends React.Component {
-
-    componentDidMount() {
-        const { match, searchResult } = this.props
-        const path = match.path === '/' ? '/news' : match.path
-        axiosWrapper.get(path, 1).then(
-            (res) => {
-                searchResult(res.data, 2)
-            },
-        );
-    }
 
     render() {
         return(
@@ -26,6 +18,9 @@ export class Main extends React.Component {
                     <Route exact path='/' component={News}/>
                     <Route path='/news' component={News}/>
                     <Route path='/ask' component={Ask}/>
+                    <Route path='/newest' component={Newest}/>
+                    <Route path='/show' component={Show}/>
+                    <Route path='/jobs' component={Jobs}/>
                 </Switch>
             </main>
         )
