@@ -3,15 +3,30 @@ import axiosWrapper from "../api";
 import {connect} from 'react-redux'
 import {searchResult} from "../actions";
 import NewsCard from "../components/Sample";
+import Waypoint from 'react-waypoint'
 
 export class Newsfeed extends React.Component {
+    state = { page: 1 }
 
     componentDidMount() {
-        axiosWrapper.get().then(
+        const { page } = this.state
+        axiosWrapper.get(page).then(
             (res) => {
-                this.props.searchResult(res.data)
+                this.props.searchResult(res.data, 2)
             },
         );
+    }
+
+    _handleLoadFunc =()=> {
+        const { page } = this.state
+        this.setState(prevState => ({
+            page: prevState.page + 1
+        }))
+        axiosWrapper.get(page).then(
+            (res) => {
+                this.props.searchResult(res.data, 3)
+            },
+        )
     }
 
     render() {
@@ -23,6 +38,10 @@ export class Newsfeed extends React.Component {
                         <NewsCard item={item}/>
                     </div>
                 )}
+                <Waypoint
+                    onEnter={this._handleLoadFunc}
+                    threshold={2.0}
+                />
             </div>
         )
     }
@@ -33,7 +52,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    searchResult: (value) => dispatch(searchResult(value))
+    searchResult: (value, id) => dispatch(searchResult(value, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Newsfeed)

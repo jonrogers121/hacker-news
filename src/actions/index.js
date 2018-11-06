@@ -1,6 +1,8 @@
-export const searchResult = (data) => dispatch => {
+export const searchResult = (data, id) => dispatch => {
+    console.log(data, id)
     dispatch({
         type: 'MOVIE_DATA',
-        payload: data
+        payload: data,
+        page: id
     })
 }

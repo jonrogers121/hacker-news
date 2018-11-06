@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
-    get: (t) =>
-        axios.get('https://api.hnpwa.com/v0/news/1.json', {
+    get: (page) =>
+        axios.get(`https://api.hnpwa.com/v0/news/${page}.json`, {
         }).then((response) => {
             return response
         }).catch((error) => {
