@@ -1,36 +1,31 @@
 import React from 'react'
-import axiosWrapper from "../api";
+import PropTypes from 'prop-types'
+import axiosWrapper from "../../api";
 import {connect} from 'react-redux'
-import {searchResult} from "../actions";
-import NewsCard from "../components/Sample";
+import { withRouter } from 'react-router'
+import {searchResult} from "../../actions/index";
+import NewsCard from "../NewsCard/index";
 import Waypoint from 'react-waypoint'
 
-export class Newsfeed extends React.Component {
+export class NewsFeed extends React.Component {
     state = { page: 1 }
 
-    componentDidMount() {
-        const { page } = this.state
-        axiosWrapper.get(page).then(
-            (res) => {
-                this.props.searchResult(res.data, 2)
-            },
-        );
-    }
-
     _handleLoadFunc =()=> {
-        const { page } = this.state
+        const { page } = this.state;
+        const { match, searchResult} = this.props;
         this.setState(prevState => ({
             page: prevState.page + 1
         }))
-        axiosWrapper.get(page).then(
+        const location = match.path === '/' ? '/news' : match.path;
+        axiosWrapper.get(location, page).then(
             (res) => {
-                this.props.searchResult(res.data, 3)
+                searchResult(res.data, 3)
             },
         )
     }
 
     render() {
-        const {result} = this.props
+        const {result} = this.props;
         return (
             <div>
                 {result && result.map((item, i) =>
@@ -47,6 +42,12 @@ export class Newsfeed extends React.Component {
     }
 }
 
+NewsFeed.propTypes = {
+    match: PropTypes.shape({
+        path: PropTypes.string.isRequired,
+    }).isRequired,
+};
+
 const mapStateToProps = state => ({
     result: state.searchResult.data
 })
@@ -55,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
     searchResult: (value, id) => dispatch(searchResult(value, id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Newsfeed)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewsFeed))
