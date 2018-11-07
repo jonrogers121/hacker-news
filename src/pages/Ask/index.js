@@ -3,7 +3,7 @@ import NewsFeed from "../../components/NewsFeed";
 
 const Ask = () => (
     <div>
-        <NewsFeed />
+        <NewsFeed key='ask'/>
     </div>
 )
 

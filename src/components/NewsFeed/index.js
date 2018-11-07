@@ -12,27 +12,30 @@ export class NewsFeed extends React.Component {
     state = { page: 1 }
 
     componentDidMount() {
-        const { match, searchResult } = this.props
+        const { match, history } = this.props
         const path = match.path === '/' ? '/news' : match.path
-        axiosWrapper.get(path, 1).then(
+        this._handleFetchContent(path, 1, true)
+        history.listen(() => {
+            this._handleFetchContent(path, 1, true)
+        })
+    }
+
+    _handleFetchContent = (path, page, firstLoad) =>{
+        axiosWrapper.get(path, page).then(
             (res) => {
-                searchResult(res.data, 2)
+                this.props.searchResult(res.data, firstLoad)
             },
         );
     }
 
     _handleLoadFunc =()=> {
         const { page } = this.state;
-        const { match, searchResult} = this.props;
+        const { match } = this.props;
         this.setState(prevState => ({
             page: prevState.page + 1
         }))
         const location = match.path === '/' ? '/news' : match.path;
-        axiosWrapper.get(location, page).then(
-            (res) => {
-                searchResult(res.data, 3)
-            },
-        )
+        this._handleFetchContent(location, page)
     }
 
     render() {

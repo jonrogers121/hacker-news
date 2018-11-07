@@ -8,20 +8,20 @@ import {searchResult} from "./actions";
 import Newest from "./pages/Newest";
 import Show from "./pages/Show";
 import Jobs from "./pages/Jobs";
+import NewsFeed from "./components/NewsFeed";
 
 export class Main extends React.Component {
 
     render() {
-        const { location } = this.props
         return(
             <main>
                 <Switch>
-                    <Route exact path='/' component={News} key={location.pathname} />
-                    <Route path='/news' component={News} key={location.pathname} />
-                    <Route path='/ask' component={Ask} key={location.pathname} />
-                    <Route path='/newest' component={Newest} key={location.pathname} />
-                    <Route path='/show' component={Show} key={location.pathname} />
-                    <Route path='/jobs' component={Jobs} key={location.pathname}/>
+                    <Route exact path='/' component={NewsFeed} />
+                    <Route path='/news' component={News} />
+                    <Route path='/ask' component={Ask} />
+                    <Route path='/newest' component={Newest} />
+                    <Route path='/show' component={Show} />
+                    <Route path='/jobs' component={Jobs} />
                 </Switch>
             </main>
         )

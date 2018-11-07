@@ -1,8 +1,7 @@
-export const searchResult = (data, id) => dispatch => {
-    console.log(data, id)
+export const searchResult = (data, firstLoad) => dispatch => {
     dispatch({
         type: 'NEWS_DATA',
         payload: data,
-        page: id
+        load: firstLoad,
     })
 }

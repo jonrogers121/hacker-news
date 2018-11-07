@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar, NavbarItem} from 'bloomer';
+import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
 
@@ -12,29 +13,29 @@ class NavBar extends React.Component {
                     </a>
                 </NavbarItem>
                 <NavbarItem>
-                    <a href="news">
+                    <Link to={'news'}>
                         News
-                    </a>
+                    </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <a href="ask">
+                    <Link to={'ask'}>
                         Ask
-                    </a>
+                    </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <a href="newest">
+                    <Link to={'newest'}>
                         Newest
-                    </a>
+                    </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <a href="show">
+                    <Link to={'show'}>
                         Show
-                    </a>
+                    </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <a href="jobs">
+                    <Link to={'jobs'}>
                         Jobs
-                    </a>
+                    </Link>
                 </NavbarItem>
             </Navbar>
         )
