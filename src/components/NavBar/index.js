@@ -1,35 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {Navbar, NavbarItem} from 'bloomer';
 
 class NavBar extends React.Component {
+
     render() {
         return (
             <Navbar style={{border: 'solid 1px #ff6600', margin: '0'}}>
                 <NavbarItem>
-                    <Link to={'/'}>
+                    <a href="/">
+                        <img src='https://news.ycombinator.com/y18.gif' alt='logo' />
+                    </a>
+                </NavbarItem>
+                <NavbarItem>
+                    <a href="news">
                         News
-                    </Link>
+                    </a>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link to={'/ask'}>
+                    <a href="ask">
                         Ask
-                    </Link>
+                    </a>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link to={'/newest'}>
+                    <a href="newest">
                         Newest
-                    </Link>
+                    </a>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link to={'/show'}>
+                    <a href="show">
                         Show
-                    </Link>
+                    </a>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link to={'/jobs'}>
+                    <a href="jobs">
                         Jobs
-                    </Link>
+                    </a>
                 </NavbarItem>
             </Navbar>
         )

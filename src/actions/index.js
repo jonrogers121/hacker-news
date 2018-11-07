@@ -1,7 +1,7 @@
 export const searchResult = (data, id) => dispatch => {
     console.log(data, id)
     dispatch({
-        type: 'MOVIE_DATA',
+        type: 'NEWS_DATA',
         payload: data,
         page: id
     })
